@@ -24,35 +24,70 @@ var authors = [
     },
 ]
 
+// Exercice 1
 app.get("/", (req, res) => {
 	res.send("Authors API");
 });
 
-// app.get("/authors/:id", (req, res) => {
-//     const id = authors[parseInt(req.params.id) - 1];
-//     const authorsInfo = `${id.name}, ${id.nationality}`;
-  
-//     if (!id) {
-//       return res.json({
-//         message: "Not found",
-//       });
-//     }
-//     res.json(authorsInfo);
-// });
+// Exercice 2
 
-app.get("/authors/:id", (req, res) => {
+ app.get("/authors/:id", (req, res) => {
+     const id = authors[parseInt(req.params.id) - 1];
+     const authorsInfo = `${id.name}, ${id.nationality}`;
+  
+     if (!id) {
+       return res.json({
+         message: "Not found",
+       });
+     }
+     res.json(authorsInfo);
+ });
+
+// Exercice 3
+
+ app.get("/authors/:id", (req, res) => {
+     const id = authors[parseInt(req.params.id) - 1];
+     const authorsInfo = `${id.books}`;
+  
+     if (!id) {
+       return res.json({
+         message: "Not found",
+       });
+     }
+    
+   res.json(id.books.join(""));
+ });
+
+// Exercice 4
+
+ app.get("/json/authors/:id", (req, res) => {
+     const id = authors[parseInt(req.params.id) - 1];
+     const authorsInfo = `${id.name}, ${id.nationality}`;
+    
+     if (!id) {
+         return res.json({
+     message: "Not found",
+     });
+ }
+ res.json({
+     name: id.name,
+     nationality: id.nationality,
+     });
+ });
+
+app.get("/json/authors/:id/books", (req, res) => {
     const id = authors[parseInt(req.params.id) - 1];
     const authorsInfo = `${id.books}`;
-  
-    if (!id) {
-      return res.json({
-        message: "Not found",
-      });
-    }
-    
-  res.json(id.books.join(""));
-});
 
+    if (!id) {
+    return res.json({
+    message: "Not found",
+    });
+}
+    res.json({
+    books: id.books.join(" "),
+    });
+});
 
 
 app.listen(8000, () => {
